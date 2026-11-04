@@ -1,0 +1,5 @@
+{
+  "name": "waiting-on-me",
+  "owner": { "name": "pyxl-dev" },
+  "plugins": [{ "name": "waiting-on-me", "source": "./" }]
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="waiting-on-me">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e0a33a"/>
+      <stop offset="1" stop-color="#a8641a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#bg)"/>
+  <!-- highlighted row: the session waiting on you -->
+  <rect x="96" y="120" width="320" height="96" rx="30" fill="#fff"/>
+  <circle cx="148" cy="168" r="22" fill="#a8641a"/>
+  <rect x="190" y="156" width="180" height="24" rx="12" fill="#a8641a" opacity=".55"/>
+  <!-- other rows -->
+  <g fill="#fff" opacity=".55">
+    <rect x="96" y="256" width="320" height="40" rx="20"/>
+    <rect x="96" y="336" width="240" height="40" rx="20"/>
+  </g>
+</svg>
