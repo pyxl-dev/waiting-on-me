@@ -46,6 +46,8 @@ flowchart LR
 
 Ouvrir ou lire une session ne change rien. Seul un tour terminé sans rien en attente la sort de la section, ou toi en la déplaçant à la main.
 
+Les sessions épinglées ne bougent jamais : elles restent dans Épinglées quelle que soit la fin du tour.
+
 ## Prérequis
 
 - L'app desktop Claude, onglet **Code** (la sidebar n'existe que là).
