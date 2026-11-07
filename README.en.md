@@ -46,6 +46,8 @@ flowchart LR
 
 Opening or reading a session changes nothing. Only a turn that ends with nothing pending takes it out of the section, or you moving it by hand.
 
+Pinned sessions never move: they stay in Pinned whatever the turn ends on.
+
 ## Requirements
 
 - The Claude desktop app, **Code** tab (the sidebar only exists there).

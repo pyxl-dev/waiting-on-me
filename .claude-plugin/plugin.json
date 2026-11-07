@@ -1,6 +1,6 @@
 {
   "name": "waiting-on-me",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Files a Claude Code desktop session under a sidebar section while it ends on a question or an action for you, and moves it back once a turn ends with nothing pending.",
   "author": { "name": "pyxl-dev", "url": "https://github.com/pyxl-dev" },
   "homepage": "https://github.com/pyxl-dev/waiting-on-me",

@@ -12,6 +12,8 @@ Decision order:
 2. No `wrap_up`: if the `jev` CLI is installed and `useJev` is on, Jev rates the final message (`noul`, threshold `jevThreshold`, default 0.35).
 3. Neither: nothing changes.
 
+Pinned sessions are never moved: they stay in Pinned whatever the turn ends on.
+
 ## Install
 
 Run, then read the output: every line starts with `✓`, `!` (optional piece missing) or `✗` (blocking).

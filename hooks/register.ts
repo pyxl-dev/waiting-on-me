@@ -76,19 +76,21 @@ export const register: Register = (on, options) => {
       if (isWaitingNow === undefined) return res
 
       // Where the session really is: the user may have moved it by hand, or a
-      // previous version filed it. Falls back to the stored flag.
+      // previous version filed it.
       const me = parse(await $.mcp.call('ccd_session_mgmt', 'get_session', { session_id: 'self' }).catch(() => null))
+      // Pinned sessions stay where the user put them. Without session info we
+      // cannot tell, so do nothing rather than risk moving a pinned session.
+      if (!me || me.pinned === true) return res
       const secs = (parse(await call('list_sections', {})) ?? []) as Array<{ id: string; kind: string; name: string }>
       let id = secs.find(x => x.kind === 'manual' && x.name === section)?.id
-      const { value: stored = false } = await $.state.get(IS_WAITING)
-      const groupId: string | undefined = me ? (me.group?.id ?? 'sessions') : undefined
-      const wasWaiting = groupId !== undefined && id !== undefined ? groupId === id : stored
+      const groupId: string = me.group?.id ?? 'sessions'
+      const wasWaiting = id !== undefined ? groupId === id : (await $.state.get(IS_WAITING)).value === true
       if (isWaitingNow === wasWaiting) return res
 
       if (isWaitingNow) {
         if (!id) id = parse(await call('create_section', { name: section }))?.id
         if (!id) return res
-        await $.state.set(ORIGIN, groupId ?? 'sessions')
+        await $.state.set(ORIGIN, groupId)
         await call('move_sessions', { session_ids: ['self'], section_id: id })
         await $.state.set(IS_WAITING, true)
       } else {
