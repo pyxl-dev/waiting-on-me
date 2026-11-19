@@ -70,7 +70,7 @@ curl -fsSL https://raw.githubusercontent.com/pyxl-dev/waiting-on-me/main/install
 The installer:
 
 1. installs the mod as a Claude Code plugin (user scope);
-2. allows `mcp__ccd_sidebar__move_sessions` and `mcp__ccd_sidebar__create_section` in `~/.claude/settings.json`, otherwise auto mode refuses moves made from a hook;
+2. allows `mcp__ccd_sidebar__move_sessions` and `mcp__ccd_sidebar__create_section` in `~/.claude/settings.json`, needed outside auto mode. In auto mode, Claude Desktop refuses every call made by a mod's own code, whatever these rules say: the mod then pauses and says so once per session;
 3. adds a short rule to `~/.claude/CLAUDE.md`, between two markers, asking Claude to end with `wrap_up` and `blocked: true` when it waits on you.
 
 It is idempotent: re-run it to update. Uninstall:

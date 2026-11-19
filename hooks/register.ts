@@ -19,6 +19,7 @@ export const register: Register = (on, options) => {
 
   // Claude's own signal for the current main-loop turn, from its wrap_up call.
   let signal: Signal
+  let autoModeNoticeShown = false
 
   on('tool.call', { tool: 'mcp__ccd_turn__wrap_up' }, ($, e, next) => {
     if (!e.agentId) {
@@ -100,7 +101,18 @@ export const register: Register = (on, options) => {
         await $.state.set(IS_WAITING, false)
       }
     } catch (err) {
-      $.ui.toast(`waiting-on-me: ${String(err).slice(0, 160)}`)
+      const msg = String(err)
+      // In auto mode, Claude Desktop refuses sidebar calls made by a plugin's
+      // own code, whatever the allow rules say. Say it once per session, not
+      // every turn; the next turns keep trying in case the mode changes.
+      if (/Not run: in auto mode/.test(msg)) {
+        if (!autoModeNoticeShown) {
+          autoModeNoticeShown = true
+          $.ui.toast('waiting-on-me: paused, Claude Desktop does not let mods move sessions in auto mode. Switch the permission mode to use it.')
+        }
+      } else {
+        $.ui.toast(`waiting-on-me: ${msg.slice(0, 160)}`)
+      }
     }
     return res
   })
